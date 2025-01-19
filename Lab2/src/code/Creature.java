@@ -11,7 +11,7 @@
 public class Creature {
 
     private final int NO_HEALTH = 0;
-    private final int MINIMUM_HEALTH = 1;
+    private final int MIN_HEALTH = 1;
     private final int MAX_HEALTH = 100;
 
     private final String name;
@@ -25,7 +25,6 @@ public class Creature {
         validateName(name);
         validateDOB(dateOfBirth);
         validateHealth(health);
-
 
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -57,21 +56,21 @@ public class Creature {
 
     /**
      * Validates the given health based on specific criteria:
-     * 1. Must be in the range of 1 - 100
+     * 1. Must be in the range of MIN_HEALTH - MAX_HEALTH
      *
      * @param health the health amount being validated
      */
     private void validateHealth(final int health) {
         if(health < NO_HEALTH || health > MAX_HEALTH) {
-            throw new IllegalArgumentException("Health must be between " + MINIMUM_HEALTH + " and " + MAX_HEALTH);
+            throw new IllegalArgumentException("Health must be between " + MIN_HEALTH + " and " + MAX_HEALTH);
         }
     }
 
     /**
      * Checks if the creature is alive or not, based on its health.
-     * @return true if health of creature is greater than 0, false otherwise
+     * @return true if health of creature is greater than NO_HEALTH, false otherwise
      */
-    private boolean isAlive() {
+    public boolean isAlive() {
         return this.health > 0;
     }
 
@@ -83,7 +82,7 @@ public class Creature {
      *
      * @param damage amount of damage taken
      */
-    private void takeDamage(final int damage) {
+    public void takeDamage(final int damage) {
         if(damage < 0){
             throw new DamageException("Damage cannot be negative");
         }
@@ -92,5 +91,54 @@ public class Creature {
         if(this.health < 0){
             this.health = NO_HEALTH;
         }
+    }
+
+    /**
+     * Heal the creature by the amount of health given.
+     * If given health amount is negative a HealingException is thrown.
+     * If health goes above MAX_HEALTH then it's set to MAX_HEALTH.
+     * 
+     * @param healAmount amount to be healed by.
+     */
+    public void heal(final int healAmount) {
+        if(healAmount < NO_HEALTH){
+            throw new HealingException("Healing amount cannot be negative.");
+        }
+
+        this.health += healAmount;
+
+        if(this.health > MAX_HEALTH){
+            this.health = MAX_HEALTH;
+        }
+    }
+
+    /**
+     * Calculates the age of the creature in years based on its date of birth.
+     * @return creatures age in years.
+     */
+    private int getAgeYears() {
+        return 0;
+    }
+
+    /**
+     * Prints out the creatures details, including its name,
+     * date of birth, age in years and amount of health.
+     */
+    public void getDetails() {
+
+        final StringBuilder details;
+
+        details = new StringBuilder();
+
+        details.append(this.name);
+        details.append("born on ");
+        details.append(dateOfBirth);
+        details.append(" (");
+        details.append(this.getAgeYears());
+        details.append(") has ");
+        details.append(this.health);
+        details.append(" health.");
+
+        System.out.print(details);
     }
 }
