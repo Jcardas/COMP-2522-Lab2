@@ -8,28 +8,32 @@
  * @author Armaan
  * @version 1.0
  */
-public class Creature {
+public class Creature
+{
 
-    private final int NO_HEALTH = 0;
-    private final int MINIMUM_HEALTH = 1;
+    private final int NO_HEALTH  = 0;
+    private final int MIN_HEALTH = 1;
     private final int MAX_HEALTH = 100;
 
     private final String name;
-    private final Date dateOfBirth;
-    private       int  health;
+    private final Date   dateOfBirth;
+    private       int    health;
 
     Creature(final String name,
              final Date dateOfBirth,
-             final int health) {
+             final int health)
+        // Throws IllegalArgumentException if parameters are invalid.
+    throws IllegalArgumentException
+    {
 
         validateName(name);
         validateDOB(dateOfBirth);
         validateHealth(health);
 
 
-        this.name = name;
+        this.name        = name;
         this.dateOfBirth = dateOfBirth;
-        this.health = health;
+        this.health      = health;
     }
 
     /**
@@ -39,8 +43,10 @@ public class Creature {
      *
      * @param name the name to be validated
      */
-    private void validateName(final String name) {
-        if(name == null || name.isBlank()) {
+    private void validateName(final String name)
+    {
+        if(name == null || name.isBlank())
+        {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
     }
@@ -51,7 +57,8 @@ public class Creature {
      *
      * @param dateOfBirth the date of birth to be validated
      */
-    private void validateDOB(final Date dateOfBirth) {
+    private void validateDOB(final Date dateOfBirth)
+    {
 
     }
 
@@ -61,17 +68,21 @@ public class Creature {
      *
      * @param health the health amount being validated
      */
-    private void validateHealth(final int health) {
-        if(health < NO_HEALTH || health > MAX_HEALTH) {
-            throw new IllegalArgumentException("Health must be between " + MINIMUM_HEALTH + " and " + MAX_HEALTH);
+    private void validateHealth(final int health)
+    {
+        if(health < NO_HEALTH || health > MAX_HEALTH)
+        {
+            throw new IllegalArgumentException("Health must be between " + MIN_HEALTH + " and " + MAX_HEALTH);
         }
     }
 
     /**
      * Checks if the creature is alive or not, based on its health.
+     *
      * @return true if health of creature is greater than 0, false otherwise
      */
-    private boolean isAlive() {
+    private boolean isAlive()
+    {
         return this.health > 0;
     }
 
@@ -83,14 +94,33 @@ public class Creature {
      *
      * @param damage amount of damage taken
      */
-    private void takeDamage(final int damage) {
-        if(damage < 0){
+    private void takeDamage(final int damage)
+    {
+        if(damage < 0)
+        {
             throw new DamageException("Damage cannot be negative");
         }
         this.health -= damage;
 
-        if(this.health < 0){
+        if(this.health < 0)
+        {
             this.health = NO_HEALTH;
         }
     }
+
+    private void heal(final int healAmount)
+    {
+        // Code logic here...
+    }
+
+    private int getAgeYears()
+    {
+        // Code logic here...
+    }
+
+    private String getDetails()
+    {
+        // Code logic here...
+    }
+
 }
