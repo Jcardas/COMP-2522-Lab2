@@ -116,22 +116,26 @@ public class Creature
      * @param healAmount amount to be healed by.
      */
     public void heal(final int healAmount) {
-        if(healAmount < NO_HEALTH){
+        if(healAmount < NO_HEALTH)
+        {
             throw new HealingException("Healing amount cannot be negative.");
         }
 
         this.health += healAmount;
 
-        if(this.health > MAX_HEALTH){
+        if(this.health > MAX_HEALTH)
+        {
             this.health = MAX_HEALTH;
         }
     }
 
     /**
      * Calculates the age of the creature in years based on its date of birth.
+     *
      * @return creatures age in years.
      */
     private int getAgeYears() {
+        //need to update with age calculation logic
         return 0;
     }
 
