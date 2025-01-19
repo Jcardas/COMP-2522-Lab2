@@ -115,7 +115,8 @@ public class Creature
      *
      * @param healAmount amount to be healed by.
      */
-    public void heal(final int healAmount) {
+    public void heal(final int healAmount)
+    {
         if(healAmount < NO_HEALTH)
         {
             throw new HealingException("Healing amount cannot be negative.");
@@ -134,7 +135,8 @@ public class Creature
      *
      * @return creatures age in years.
      */
-    private int getAgeYears() {
+    private int getAgeYears()
+    {
         //need to update with age calculation logic
         return 0;
     }
@@ -143,7 +145,8 @@ public class Creature
      * Prints out the creatures details, including its name,
      * date of birth, age in years and amount of health.
      */
-    public void getDetails() {
+    public void getDetails()
+    {
 
         final StringBuilder details;
 
