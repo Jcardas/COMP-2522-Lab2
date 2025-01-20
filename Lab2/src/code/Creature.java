@@ -98,7 +98,7 @@ public class Creature
 
     /**
      * Validates the given health based on specific criteria:
-     * 1. Must be in the range of 1 - 100
+     * 1. Must be in the range of MIN_HEALTH - MAX_HEALTH
      *
      * @param health the health amount being validated
      */
@@ -154,14 +154,13 @@ public class Creature
     {
         if(healAmount < NO_HEALTH)
         {
-            throw new HealingException("Healing cannot be negative");
+            throw new HealingException("Healing amount cannot be negative.");
         }
 
         // Checks if healing would exceed maximum health,
         // if so, set current health to maximum health.
         // Otherwise, heal the creature by healAmount.
         this.health = (this.health + healAmount > MAX_HEALTH) ? MAX_HEALTH : this.health + healAmount;
-
     }
 
     /**
@@ -181,8 +180,20 @@ public class Creature
      */
     private void getDetails()
     {
-        System.out.println("This creature's name is " + this.name + " it was born on " +
-                           this.dateOfBirth.toString() + ", is " + getAgeYears() +
-                           " years old. and has " + this.health + " health.");
+
+        final StringBuilder details;
+
+        details = new StringBuilder();
+
+        details.append(this.name);
+        details.append("born on ");
+        details.append(dateOfBirth);
+        details.append(" (");
+        details.append(this.getAgeYears());
+        details.append(") has ");
+        details.append(this.health);
+        details.append(" health.");
+
+        System.out.print(details);
     }
 }
