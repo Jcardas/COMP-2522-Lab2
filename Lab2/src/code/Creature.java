@@ -24,7 +24,7 @@ public class Creature
     static
     {
         // Health Constants
-        NO_HEALTH = 0;
+        NO_HEALTH  = 0;
         MIN_HEALTH = 1;
         MAX_HEALTH = 100;
 
@@ -43,20 +43,20 @@ public class Creature
      * <p>Validates the input parameters and throws an {@link IllegalArgumentException}
      * if the parameters are invalid.</p>
      *
-     * @param name the name of the creature.
+     * @param name        the name of the creature.
      * @param dateOfBirth the Date object of the date of birth of the creature.
-     * @param health the initial health of the creature.
+     * @param health      the initial health of the creature.
      * @throws IllegalArgumentException if any of the following:
-     * <ul>
-     *     <li>{@code name} is {@code null} or empty.</li>
-     *     <li>{@code dateOfBirth} is {@code null}.</li>
-     *     <li>{@code health} is negative.</li>
-     * </ul>
+     *                                  <ul>
+     *                                      <li>{@code name} is {@code null} or empty.</li>
+     *                                      <li>{@code dateOfBirth} is {@code null}.</li>
+     *                                      <li>{@code health} is negative.</li>
+     *                                  </ul>
      */
     Creature(final String name,
              final Date dateOfBirth,
              final int health)
-        // Throws IllegalArgumentException if parameters are invalid.
+    // Throws IllegalArgumentException if parameters are invalid.
     throws IllegalArgumentException
     {
 
@@ -180,7 +180,6 @@ public class Creature
      */
     private void getDetails()
     {
-
         final StringBuilder details;
 
         details = new StringBuilder();
