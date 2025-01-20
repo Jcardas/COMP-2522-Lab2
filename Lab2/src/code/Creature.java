@@ -157,10 +157,8 @@ public class Creature
             throw new HealingException("Healing amount cannot be negative.");
         }
 
-        // Checks if healing would exceed maximum health,
-        // if so, set current health to maximum health.
-        // Otherwise, heal the creature by healAmount.
-        this.health = (this.health + healAmount > MAX_HEALTH) ? MAX_HEALTH : this.health + healAmount;
+        // Adds the healAmount to current health, or sets the health to MAX_HEALTH, whichever is lower.
+        this.health = Math.min(this.health + healAmount, MAX_HEALTH);
     }
 
     /**
