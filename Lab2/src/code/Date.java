@@ -3,7 +3,10 @@
 /**
  * Represents a date, with the capability of calculating the day of week.
  *
- * @author Felix
+ * @author Felix Nguyen
+ * @author Justin Cardas
+ * @author Armaan Brar
+ * @author Mohammad Sadeghi
  * @version 25.01
  */
 public class Date
