@@ -11,14 +11,48 @@
 public class Creature
 {
 
-    private final int NO_HEALTH  = 0;
-    private final int MIN_HEALTH = 1;
-    private final int MAX_HEALTH = 100;
+    // Instance Variables
+
+    // Health
+    private static final int NO_HEALTH;
+    private static final int MIN_HEALTH;
+    private static final int MAX_HEALTH;
+
+    // Year
+    private static final int CURRENT_YEAR;
+
+    static
+    {
+        // Health Constants
+        NO_HEALTH = 0;
+        MIN_HEALTH = 1;
+        MAX_HEALTH = 100;
+
+        // Year Constants
+        CURRENT_YEAR = 2025;
+    }
 
     private final String name;
     private final Date   dateOfBirth;
     private       int    health;
 
+    /**
+     * <p>Constructs a new {@code Creature} object with the specified
+     * {@code name}, {@code dateOfBirth}, and {@code health}</p>
+     *
+     * <p>Validates the input parameters and throws an {@link IllegalArgumentException}
+     * if the parameters are invalid.</p>
+     *
+     * @param name the name of the creature.
+     * @param dateOfBirth the Date object of the date of birth of the creature.
+     * @param health the initial health of the creature.
+     * @throws IllegalArgumentException if any of the following:
+     * <ul>
+     *     <li>{@code name} is {@code null} or empty.</li>
+     *     <li>{@code dateOfBirth} is {@code null}.</li>
+     *     <li>{@code health} is negative.</li>
+     * </ul>
+     */
     Creature(final String name,
              final Date dateOfBirth,
              final int health)
@@ -108,19 +142,47 @@ public class Creature
         }
     }
 
+    /**
+     * <p>Updates creatures health by healing applied.</p>
+     * <p>Increases a creatures health by {@code healAmount}</p>
+     * <p>If health increases past {@code MAX_HEALTH} it is set to {@code MAX_HEALTH}</p>
+     * <p>If {@code healAmount} is negative, a {@code HealingException} is thrown</p>
+     *
+     * @param healAmount amount of healing to apply
+     */
     private void heal(final int healAmount)
     {
-        // Code logic here...
+        if(healAmount < NO_HEALTH)
+        {
+            throw new HealingException("Healing cannot be negative");
+        }
+
+        // Checks if healing would exceed maximum health,
+        // if so, set current health to maximum health.
+        // Otherwise, heal the creature by healAmount.
+        this.health = (this.health + healAmount > MAX_HEALTH) ? MAX_HEALTH : this.health + healAmount;
+
     }
 
+    /**
+     * <p>Returns the age of the creature in years
+     * by subtracting the year of birth from the {@code CURRENT_YEAR}</p>
+     *
+     * @return int - age in years.
+     */
     private int getAgeYears()
     {
-        // Code logic here...
+        // Returns age of the creature by subtracting the year of birth from the current year.
+        return CURRENT_YEAR - this.dateOfBirth.getYear();
     }
 
-    private String getDetails()
+    /**
+     * <p>Prints the creature's name, dateOfBirth, age, and health in a formatted string</p>
+     */
+    private void getDetails()
     {
-        // Code logic here...
+        System.out.println("This creature's name is " + this.name + " it was born on " +
+                           this.dateOfBirth.toString() + ", is " + getAgeYears() +
+                           " years old. and has " + this.health + " health.");
     }
-
 }
