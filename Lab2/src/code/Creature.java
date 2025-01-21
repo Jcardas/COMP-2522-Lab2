@@ -8,7 +8,7 @@
  * @author Armaan
  * @version 1.0
  */
-public class Creature
+class Creature
 {
 
     // Instance Variables
@@ -115,9 +115,9 @@ public class Creature
      *
      * @return true if health of creature is greater than 0, false otherwise
      */
-    private boolean isAlive()
+    boolean isAlive()
     {
-        return this.health > 0;
+        return this.health > NO_HEALTH;
     }
 
     /**
@@ -128,15 +128,15 @@ public class Creature
      *
      * @param damage amount of damage taken
      */
-    private void takeDamage(final int damage)
+    void takeDamage(final int damage)
     {
-        if(damage < 0)
+        if(damage < NO_HEALTH)
         {
             throw new DamageException("Damage cannot be negative");
         }
         this.health -= damage;
 
-        if(this.health < 0)
+        if(this.health < NO_HEALTH)
         {
             this.health = NO_HEALTH;
         }
@@ -150,7 +150,7 @@ public class Creature
      *
      * @param healAmount amount of healing to apply
      */
-    private void heal(final int healAmount)
+    void heal(final int healAmount)
     {
         if(healAmount < NO_HEALTH)
         {
@@ -167,7 +167,7 @@ public class Creature
      *
      * @return int - age in years.
      */
-    private int getAgeYears()
+    int getAgeYears()
     {
         // Returns age of the creature by subtracting the year of birth from the current year.
         return CURRENT_YEAR - this.dateOfBirth.getYear();
@@ -176,20 +176,20 @@ public class Creature
     /**
      * <p>Prints the creature's name, dateOfBirth, age, and health in a formatted string</p>
      */
-    private void getDetails()
+    void getDetails()
     {
         final StringBuilder details;
 
         details = new StringBuilder();
 
         details.append(this.name);
-        details.append("born on ");
+        details.append(", born on ");
         details.append(dateOfBirth);
         details.append(" (");
         details.append(this.getAgeYears());
         details.append(") has ");
         details.append(this.health);
-        details.append(" health.");
+        details.append(" health");
 
         System.out.print(details);
     }
