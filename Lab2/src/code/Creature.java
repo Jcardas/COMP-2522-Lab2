@@ -74,6 +74,21 @@ class Creature
         this.health      = health;
     }
 
+    public String getName()
+    {
+        return name;
+    }
+
+    public Date getDateOfBirth()
+    {
+        return dateOfBirth;
+    }
+
+    public int getHealth()
+    {
+        return health;
+    }
+
     /**
      * Validates the given name based on specific criteria:
      * 1. Must not be null
