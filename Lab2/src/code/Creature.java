@@ -20,6 +20,8 @@ class Creature
 
     // Year
     private static final int CURRENT_YEAR;
+    private static final int CURRENT_MONTH;
+    private static final int CURRENT_DAY;
 
     static
     {
@@ -30,6 +32,8 @@ class Creature
 
         // Year Constants
         CURRENT_YEAR = 2025;
+        CURRENT_MONTH = 1;
+        CURRENT_DAY = 23;
     }
 
     private final String name;
@@ -93,7 +97,32 @@ class Creature
      */
     private void validateDOB(final Date dateOfBirth)
     {
+        //throw an IllegalArgumentException if no date of birth is given
+        if(dateOfBirth == null)
+        {
+            throw new IllegalArgumentException("Date of birth cannot be null");
+        }
 
+        //throw an IllegalArgumentException if year of date of birth is in the future
+        if(dateOfBirth.getYear() > CURRENT_YEAR)
+        {
+            throw new IllegalArgumentException("Date of birth cannot be in the future");
+        }
+
+        if(dateOfBirth.getYear() == CURRENT_YEAR)
+        {
+            //throw an IllegalArgumentException if month of date of birth is in the future of the current year
+            if(dateOfBirth.getMonth() > CURRENT_MONTH)
+            {
+                throw new IllegalArgumentException("Date of birth cannot be in the future");
+            }
+
+            //throw an IllegalArgumentException if day of date of birth is in the future of the current year and current month
+            if (dateOfBirth.getMonth() == CURRENT_MONTH && dateOfBirth.getDay() > CURRENT_DAY)
+            {
+                throw new IllegalArgumentException("Date of birth cannot be in the future");
+            }
+        }
     }
 
     /**
