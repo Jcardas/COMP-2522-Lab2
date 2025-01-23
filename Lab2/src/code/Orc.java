@@ -65,7 +65,7 @@ public class Orc extends Creature
         {
             throw new IllegalArgumentException("creatureHit cannot be null");
         }
-        if(rage < RAGE_BOOST_REQUIREMENT)
+        if(rage > RAGE_BOOST_REQUIREMENT)
         {
             creatureHit.takeDamage(RAGE_BOOSTED_DAMAGE );
         }
