@@ -1,6 +1,6 @@
-public class DamageException extends RuntimeException
+class DamageException extends RuntimeException
 {
-    public DamageException(String message) {
+    DamageException(final String message) {
         super(message);
     }
 }

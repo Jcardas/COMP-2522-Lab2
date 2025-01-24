@@ -1,6 +1,6 @@
-public class HealingException extends RuntimeException
+class HealingException extends RuntimeException
 {
-    public HealingException(String message)
+    HealingException(final String message)
     {
         super(message);
     }

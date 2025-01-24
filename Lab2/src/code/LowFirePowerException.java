@@ -1,6 +1,6 @@
-public class LowFirePowerException extends RuntimeException
+class LowFirePowerException extends Exception
 {
-    public LowFirePowerException(String message)
+    LowFirePowerException(final String message)
     {
         super(message);
     }

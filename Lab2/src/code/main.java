@@ -21,14 +21,19 @@ public class main
 
         Date d1 = new Date(15, 7, 2004);
 
-        Dragon c1 = new Dragon("john", d1, 25, 50);
+        Dragon c1 = new Dragon("john", d1, 25, 0);
         Dragon c2 = new Dragon("Dragor", d1, 50, 50);
 
         c1.getDetails();
 
         c2.getDetails();
 
-        c1.breathFire(c2);
+        try{
+             c1.breathFire(c2);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
 
         c2.getDetails();
 

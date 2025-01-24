@@ -101,7 +101,7 @@ class Dragon extends Creature
         }
         if(this.firePower < FIREPOWER_COST)
         {
-            throw new LowFirePowerException("Fire power too low. " + "[" + this.firePower + "]");
+            throw new LowFirePowerException("Can't breath fire. Fire power too low. " + "[" + this.firePower + "]");
         }
 
         // Reduce firePower by 10, cause creature hit to take 20 damage.
