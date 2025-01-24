@@ -93,12 +93,13 @@ class Dragon extends Creature
      * @throws LowFirePowerException if the current firePower amount is lower than FIREPOWER_COST.
      **/
     void breathFire(final Creature creatureHit)
+    throws LowFirePowerException
     {
-        if (creatureHit == null)
+        if(creatureHit == null)
         {
             throw new IllegalArgumentException("creatureHit cannot be null.");
         }
-        if (this.firePower < FIREPOWER_COST)
+        if(this.firePower < FIREPOWER_COST)
         {
             throw new LowFirePowerException("Fire power too low. " + "[" + this.firePower + "]");
         }
