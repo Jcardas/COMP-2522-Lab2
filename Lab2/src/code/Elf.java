@@ -79,10 +79,12 @@ public class Elf extends Creature
         System.out.println(details.toString());
     }
 
-    /*
+    /**
      * <p>Reduces {@code mana} by {@code MANA_SPELL_COST} and deals {@code SPELL_POWER}
      * amount of damage to a creature. If {@code mana} is less than {@code MANA_SPELL_COST}
      * throw checked exception {@link LowManaException}.
+     *
+     * @param creatureHit The {@link Creature} object to be affected.
      */
     void castSpell(Creature creatureHit)
     throws LowManaException
@@ -93,15 +95,19 @@ public class Elf extends Creature
         }
         if(this.mana < MANA_SPELL_COST)
         {
-            throw new LowManaException("Mana is too low to cast spell " + "[" + this.mana + "]");
+            throw new LowManaException("couldn't cast spell. Mana is too low. " + "[" + this.mana + "]");
         }
         this.mana -= MANA_SPELL_COST;
         creatureHit.takeDamage(SPELL_POWER);
     }
 
-    /*
-     * Restores mana based on amount provided. Amount cannot be negative or
-     * exceed {@code MAX_MANA}
+    /**
+     * <p>Increases {@code mana} by {@code amount} and deals {@code SPELL_POWER}
+     * amount of damage to a creature.<p/>
+     * <p>If {@code amount} is less than {@code MIN_MANA} or greater</p>
+     * than {@code MAX_MANA} throw {@link IllegalArgumentException}
+     *
+     * @param amount The amount of mana to restore.
      */
     void restoreMana(int amount)
     {

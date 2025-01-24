@@ -220,8 +220,7 @@ public class Date
             case 10 -> DAYS_IN_OCT;
             case 11 -> DAYS_IN_NOV;
             case 12 -> DAYS_IN_DEC;
-            default ->
-                    throw new IllegalStateException("Unexpected value: " + month);
+            default -> throw new IllegalStateException("Unexpected value: " + month);
         };
     }
 
@@ -327,8 +326,7 @@ public class Date
             case 10 -> OCT_WEEKDAY_CODE;
             case 11 -> NOV_WEEKDAY_CODE;
             case 12 -> DEC_WEEKDAY_CODE;
-            default ->
-                    throw new IllegalStateException("Unexpected value: " + month);
+            default -> throw new IllegalStateException("Unexpected value: " + month);
         };
         valueStep6 = valueStep5 % DAYS_IN_WEEK;
         return switch(valueStep6)
@@ -340,8 +338,7 @@ public class Date
             case 4 -> "wednesday";
             case 5 -> "thursday";
             case 6 -> "friday";
-            default ->
-                    throw new IllegalStateException("Unexpected value: " + valueStep6);
+            default -> throw new IllegalStateException("Unexpected value: " + valueStep6);
         };
     }
 
@@ -398,6 +395,25 @@ public class Date
                              this.day);
     }
 
+    /**
+     * Converts the date represented by this object into a readable string format.
+     *
+     * <p>The format of the returned string is: <br>
+     * {@code [DayOfWeek], [MonthName] [Day], [Year]}</p>
+     *
+     * <p>For example:</p>
+     * <ul>
+     *   <li>{@code "Monday, January 1, 2023"}</li>
+     *   <li>{@code "Friday, December 25, 2020"}</li>
+     * </ul>
+     *
+     * <p>The month is converted from its numeric representation into its full English name.
+     * If the numeric value for the month is not between 1 and 12, an
+     * {@link IllegalStateException} is thrown.</p>
+     *
+     * @return a human-readable string representation of the date.
+     * @throws IllegalStateException if the month value is outside the range of 1 to 12.
+     */
     @Override
     public String toString()
     {
@@ -418,8 +434,7 @@ public class Date
             case 10 -> "October";
             case 11 -> "November";
             case 12 -> "December";
-            default ->
-                    throw new IllegalStateException("Unexpected value: " + this.month);
+            default -> throw new IllegalStateException("Unexpected value: " + this.month);
         };
 
         humanReadableDate = new StringBuilder();

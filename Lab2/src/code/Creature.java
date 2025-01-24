@@ -98,12 +98,11 @@ class Creature
         return health;
     }
 
-    /**
+    /*
      * Validates the given name based on specific criteria:
      * 1. Must not be null
      * 2. Must not be empty
      *
-     * @param name the name to be validated
      */
     private void validateName(final String name)
     {
@@ -113,11 +112,10 @@ class Creature
         }
     }
 
-    /**
+    /*
      * Validates the given date of birth based on specific criteria:
      * 1. Must not be in the future
      *
-     * @param dateOfBirth the date of birth to be validated
      */
     private void validateDOB(final Date dateOfBirth)
     {
@@ -149,11 +147,10 @@ class Creature
         }
     }
 
-    /**
+    /*
      * Validates the given health based on specific criteria:
      * 1. Must be in the range of MIN_HEALTH - MAX_HEALTH
      *
-     * @param health the health amount being validated
      */
     private void validateHealth(final int health)
     {

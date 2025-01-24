@@ -2,7 +2,7 @@ public class Orc extends Creature
 {
     private static final int RAGE_BOOST_REQUIREMENT;
     private static final int BERSERK_RAGE_INCREASE;
-    private static final int RAGE_BOOSTED_DAMAGE;
+    private static final int RAGE_BOOST_MODIFIER;
     private static final int MIN_RAGE;
     private static final int MAX_RAGE;
     private static final int RAGE_NORMAL_DAMAGE;
@@ -12,11 +12,11 @@ public class Orc extends Creature
     static
     {
         RAGE_BOOST_REQUIREMENT = 20;
-        RAGE_BOOSTED_DAMAGE = 30;
-        BERSERK_RAGE_INCREASE = 5;
-        MIN_RAGE = 5;
-        MAX_RAGE = 30;
-        RAGE_NORMAL_DAMAGE = 15;
+        RAGE_BOOST_MODIFIER    = 2;
+        BERSERK_RAGE_INCREASE  = 5;
+        MIN_RAGE               = 5;
+        MAX_RAGE               = 30;
+        RAGE_NORMAL_DAMAGE     = 15;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Orc extends Creature
         final Date dateOfBirth,
         final int health,
         final int rage)
-            throws IllegalArgumentException
+    throws IllegalArgumentException
     {
         super(name, dateOfBirth, health);
 
@@ -51,13 +51,13 @@ public class Orc extends Creature
      */
     private void validateRage(final int rage)
     {
-        if (rage < MIN_RAGE)
+        if(rage < MIN_RAGE)
         {
-            throw new IllegalArgumentException("Firepower cannot be negative.");
+            throw new LowRageException("Rage too low.");
         }
-        if (rage > MAX_RAGE)
+        if(rage > MAX_RAGE)
         {
-            throw new IllegalArgumentException("Firepower cannot be negative.");
+            throw new LowRageException("Rage too high.");
         }
     }
 
@@ -81,6 +81,16 @@ public class Orc extends Creature
     }
 
     /**
+     * Gets the current rage amount.
+     *
+     * @return int rage.
+     */
+    int getRage()
+    {
+        return this.rage;
+    }
+
+    /**
      * <p>Damages the {@link Creature} object {@code creatureHit}</p>
      * <p>Increases {@code rage} by {@code BERSERK_RAGE_INCREASE}.</p>
      *
@@ -92,19 +102,22 @@ public class Orc extends Creature
      */
     void berserk(Creature creatureHit)
     {
-        if (creatureHit == null)
+        if(creatureHit == null)
         {
             throw new IllegalArgumentException("creatureHit cannot be null");
         }
-        if (rage > RAGE_BOOST_REQUIREMENT)
+        if(rage > RAGE_BOOST_REQUIREMENT)
         {
-            creatureHit.takeDamage(RAGE_BOOSTED_DAMAGE);
+            creatureHit.takeDamage(RAGE_NORMAL_DAMAGE * RAGE_BOOST_MODIFIER);
+            this.rage += BERSERK_RAGE_INCREASE;
         }
-        if (rage < MIN_RAGE)
+        if(rage < MIN_RAGE)
         {
-            throw new LowRageException("Invalid rage amount: " + rage);
+            throw new LowRageException("rage too low: [" + rage + "]");
+        } else if(rage < RAGE_BOOST_REQUIREMENT)
+        {
+            creatureHit.takeDamage(RAGE_NORMAL_DAMAGE);
+            this.rage += BERSERK_RAGE_INCREASE;
         }
-        this.rage += BERSERK_RAGE_INCREASE;
-        creatureHit.takeDamage(RAGE_NORMAL_DAMAGE);
     }
 }
