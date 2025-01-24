@@ -1,8 +1,10 @@
 public class Orc extends Creature
 {
     private static final int RAGE_BOOST_REQUIREMENT;
+    private static final int BERSERK_RAGE_INCREASE;
     private static final int RAGE_BOOSTED_DAMAGE;
     private static final int MIN_RAGE;
+    private static final int MAX_RAGE;
     private static final int RAGE_NORMAL_DAMAGE;
 
     private int rage;
@@ -10,40 +12,59 @@ public class Orc extends Creature
     static
     {
         RAGE_BOOST_REQUIREMENT = 20;
-        RAGE_BOOSTED_DAMAGE    = 30;
-        MIN_RAGE               = 5;
-        RAGE_NORMAL_DAMAGE     = 15;
+        RAGE_BOOSTED_DAMAGE = 30;
+        BERSERK_RAGE_INCREASE = 5;
+        MIN_RAGE = 5;
+        MAX_RAGE = 30;
+        RAGE_NORMAL_DAMAGE = 15;
     }
 
     /**
-     * <p>Constructs a new {@code Creature} object with the specified
-     * {@code name}, {@code dateOfBirth}, and {@code health}</p>
+     * <p>Constructs a new {@code Orc} object with the specified
+     * {@code name}, {@code dateOfBirth}, {@code health}, and {@code rage}</p>
+     * <p>
+     * Validates input parameter and throws an exception if parameters are invalid.
      *
-     * <p>Validates the input parameters and throws an {@link IllegalArgumentException}
-     * if the parameters are invalid.</p>
-     *
-     * @param name        the name of the creature.
-     * @param dateOfBirth the Date object of the date of birth of the creature.
-     * @param health      the initial health of the creature.
-     * @throws IllegalArgumentException if any of the following:
-     *                                  <ul>
-     *                                      <li>{@code name} is {@code null} or empty.</li>
-     *                                      <li>{@code dateOfBirth} is {@code null}.</li>
-     *                                      <li>{@code health} is negative.</li>
-     *                                  </ul>
+     * @param name        the name of the creature
+     * @param dateOfBirth Date object for the creature's date of birth
+     * @param health      The initial health of the creature
+     * @param rage        The initial rage of the creature
+     * @throws IllegalArgumentException if {@code rage} is negative or greater than {@code MAX_FIREPOWER}
      */
     Orc(final String name,
         final Date dateOfBirth,
         final int health,
         final int rage)
-        throws IllegalArgumentException
+            throws IllegalArgumentException
     {
         super(name, dateOfBirth, health);
+
+        validateRage(rage);
 
         this.rage = rage;
 
     }
 
+    /*
+     * Checks if rage is less than MIN_RAGE or greater than MAX_RAGE.
+     * If true, throws an IllegalArgumentException.
+     */
+    private void validateRage(final int rage)
+    {
+        if (rage < MIN_RAGE)
+        {
+            throw new IllegalArgumentException("Firepower cannot be negative.");
+        }
+        if (rage > MAX_RAGE)
+        {
+            throw new IllegalArgumentException("Firepower cannot be negative.");
+        }
+    }
+
+    /**
+     * Overrides {@code getDetails} from parent class and adds the creature's
+     * {@code rage} amount to the output.
+     */
     @Override
     void getDetails()
     {
@@ -59,21 +80,31 @@ public class Orc extends Creature
         System.out.println(details.toString());
     }
 
-    private void berserk(Creature creatureHit)
+    /**
+     * <p>Damages the {@link Creature} object {@code creatureHit}</p>
+     * <p>Increases {@code rage} by {@code BERSERK_RAGE_INCREASE}.</p>
+     *
+     * <p>If {@code rage} exceeds {@code RAGE_BOOST_REQUIREMENT}, deals double damage ({@code RAGE_BOOSTED_DAMAGE})
+     * to the passed Creature object {@code creatureHit}</p>
+     *
+     * @throws IllegalArgumentException if {@code creatureHut} is {@code null}
+     * @throws LowRageException         if {@code rage} is less than {@code MIN_RAGE}
+     */
+    void berserk(Creature creatureHit)
     {
-        if(creatureHit == null)
+        if (creatureHit == null)
         {
             throw new IllegalArgumentException("creatureHit cannot be null");
         }
-        if(rage > RAGE_BOOST_REQUIREMENT)
+        if (rage > RAGE_BOOST_REQUIREMENT)
         {
-            creatureHit.takeDamage(RAGE_BOOSTED_DAMAGE );
+            creatureHit.takeDamage(RAGE_BOOSTED_DAMAGE);
         }
-        if(rage < MIN_RAGE)
+        if (rage < MIN_RAGE)
         {
             throw new LowRageException("Invalid rage amount: " + rage);
         }
-        this.rage += MIN_RAGE;
+        this.rage += BERSERK_RAGE_INCREASE;
         creatureHit.takeDamage(RAGE_NORMAL_DAMAGE);
     }
 }

@@ -84,7 +84,8 @@ public class Elf extends Creature
      * amount of damage to a creature. If {@code mana} is less than {@code MANA_SPELL_COST}
      * throw checked exception {@link LowManaException}.
      */
-    private void castSpell(Creature creatureHit)
+    void castSpell(Creature creatureHit)
+    throws LowManaException
     {
         if(creatureHit == null)
         {
@@ -95,14 +96,14 @@ public class Elf extends Creature
             throw new LowManaException("Mana is too low to cast spell " + "[" + this.mana + "]");
         }
         this.mana -= MANA_SPELL_COST;
-        creatureHit.takeDamage( SPELL_POWER );
+        creatureHit.takeDamage(SPELL_POWER);
     }
 
     /*
      * Restores mana based on amount provided. Amount cannot be negative or
      * exceed {@code MAX_MANA}
      */
-    private void restoreMana(int amount)
+    void restoreMana(int amount)
     {
         if(amount < MIN_MANA || amount > MAX_MANA)
         {

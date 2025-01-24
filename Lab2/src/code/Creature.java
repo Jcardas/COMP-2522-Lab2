@@ -26,7 +26,7 @@ class Creature
     static
     {
         // Health Constants
-        NO_HEALTH  = 0;
+        NO_HEALTH = 0;
         MIN_HEALTH = 1;
         MAX_HEALTH = 100;
 
@@ -37,8 +37,8 @@ class Creature
     }
 
     private final String name;
-    private final Date   dateOfBirth;
-    private       int    health;
+    private final Date dateOfBirth;
+    private int health;
 
     /**
      * <p>Constructs a new {@code Creature} object with the specified
@@ -61,7 +61,7 @@ class Creature
              final Date dateOfBirth,
              final int health)
     // Throws IllegalArgumentException if parameters are invalid.
-    throws IllegalArgumentException
+            throws IllegalArgumentException
     {
 
         validateName(name);
@@ -69,21 +69,30 @@ class Creature
         validateHealth(health);
 
 
-        this.name        = name;
+        this.name = name;
         this.dateOfBirth = dateOfBirth;
-        this.health      = health;
+        this.health = health;
     }
 
+    /**
+     * @return String name of the creature.
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * @return Date object date of birth of the creature.
+     */
     public Date getDateOfBirth()
     {
         return dateOfBirth;
     }
 
+    /**
+     * @return int health of the creature.
+     */
     public int getHealth()
     {
         return health;
@@ -98,7 +107,7 @@ class Creature
      */
     private void validateName(final String name)
     {
-        if(name == null || name.isBlank())
+        if (name == null || name.isBlank())
         {
             throw new IllegalArgumentException("Name cannot be null or empty");
         }
@@ -113,21 +122,21 @@ class Creature
     private void validateDOB(final Date dateOfBirth)
     {
         //throw an IllegalArgumentException if no date of birth is given
-        if(dateOfBirth == null)
+        if (dateOfBirth == null)
         {
             throw new IllegalArgumentException("Date of birth cannot be null");
         }
 
         //throw an IllegalArgumentException if year of date of birth is in the future
-        if(dateOfBirth.getYear() > CURRENT_YEAR)
+        if (dateOfBirth.getYear() > CURRENT_YEAR)
         {
             throw new IllegalArgumentException("Date of birth cannot be in the future");
         }
 
-        if(dateOfBirth.getYear() == CURRENT_YEAR)
+        if (dateOfBirth.getYear() == CURRENT_YEAR)
         {
             //throw an IllegalArgumentException if month of date of birth is in the future of the current year
-            if(dateOfBirth.getMonth() > CURRENT_MONTH)
+            if (dateOfBirth.getMonth() > CURRENT_MONTH)
             {
                 throw new IllegalArgumentException("Date of birth cannot be in the future");
             }
@@ -148,7 +157,7 @@ class Creature
      */
     private void validateHealth(final int health)
     {
-        if(health < NO_HEALTH || health > MAX_HEALTH)
+        if (health < NO_HEALTH || health > MAX_HEALTH)
         {
             throw new IllegalArgumentException("Health must be between " + MIN_HEALTH + " and " + MAX_HEALTH);
         }
@@ -174,13 +183,13 @@ class Creature
      */
     void takeDamage(final int damage)
     {
-        if(damage < NO_HEALTH)
+        if (damage < NO_HEALTH)
         {
             throw new DamageException("Damage cannot be negative");
         }
         this.health -= damage;
 
-        if(this.health < NO_HEALTH)
+        if (this.health < NO_HEALTH)
         {
             this.health = NO_HEALTH;
         }
@@ -196,7 +205,7 @@ class Creature
      */
     void heal(final int healAmount)
     {
-        if(healAmount < NO_HEALTH)
+        if (healAmount < NO_HEALTH)
         {
             throw new HealingException("Healing amount cannot be negative.");
         }
