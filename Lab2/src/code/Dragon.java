@@ -25,7 +25,18 @@ class Dragon extends Creature
 
     private int firePower;
 
-
+    /**
+     * <p>Constructs a new {@code Dragon} object with the specified
+     * {@code name}, {@code dateOfBirth}, {@code health}, and {@code firePower}</p>
+     * <p>
+     * Validates input parameter and throws an exception if parameters are invalid.
+     *
+     * @param name        the name of the creature
+     * @param dateOfBirth Date object for the creature's date of birth
+     * @param health      The initial health of the creature
+     * @param firePower   The initial firePower of the creature
+     * @throws IllegalArgumentException if {@code firePower} is negative or greater than {@code MAX_FIREPOWER}
+     */
     Dragon(final String name,
            final Date dateOfBirth,
            final int health,
@@ -40,6 +51,10 @@ class Dragon extends Creature
     }
 
 
+    /*
+     * Checks if firePower is less than MIN_FIREPOWER.
+     * If true, throws an IllegalArgumentException.
+     */
     private void validateFirePower(final int firePower)
     {
         if (firePower < MIN_FIREPOWER)
@@ -48,6 +63,10 @@ class Dragon extends Creature
         }
     }
 
+    /**
+     * Overrides {@code getDetails} from parent class and adds the creature's
+     * {@code firePower} amount to the output.
+     */
     @Override
     void getDetails()
     {
@@ -64,6 +83,15 @@ class Dragon extends Creature
         System.out.println(details.toString());
     }
 
+    /**
+     * <p>Reduces {@code firePower} by {@code FIREPOWER_COST} and deals {@code FIREPOWER_DAMAGE}
+     * amount of damage to a creature.</p>
+     * <p>If {@code firePower} is less than {@code FIREPOWER_COST}
+     * throw checked exception {@link LowFirePowerException}.</p>
+     *
+     * @param creatureHit The creature object to be affected.
+     * @throws LowFirePowerException if the current firePower amount is lower than FIREPOWER_COST.
+     **/
     void breathFire(final Creature creatureHit)
     {
         if (creatureHit == null)
@@ -80,6 +108,13 @@ class Dragon extends Creature
         creatureHit.takeDamage(FIREPOWER_DAMAGE);
     }
 
+    /**
+     * <p>Restores firePower based on amount provided. Amount cannot be negative.</p>
+     * <p>If amount will exceed MAX_FIREPOWER, set the current firePower to MAX_FIREPOWER instead.</p>
+     *
+     * @param amount The amount of firePower to restore.
+     * @throws IllegalArgumentException if the current firePower amount is less than MIN_FIREPOWER.
+     **/
     void restoreFirePower(int amount)
     {
         if (amount < MIN_FIREPOWER)
